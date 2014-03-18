@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  salary: 1
+  points: 1
+  field_goals_made: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  salary: 1
+  points: 1
+  field_goals_made: 1
