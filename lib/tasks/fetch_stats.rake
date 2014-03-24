@@ -8,14 +8,57 @@ task :fetch_stats => :environment do
   Xmlstats.contact_info = @admin.email
 
   @n = 0
-  @start_date = Date.parse("2013-10-29")
+  @start_date = Date.parse("2013-10-30")
 
   while @start_date < Date.today
     @nightly_games = Xmlstats.events(@start_date, :nba)
     if @nightly_games != []
       puts "games on #{@start_date.inspect}"
       @nightly_games.each do |game|
-        if @n != 0 && @n % 2 == 0
+
+        if game.event_status == "completed"
+          puts game.event_id
+          full_game_stats = [Xmlstats.nba_box_score(game.event_id).home_stats, Xmlstats.nba_box_score(game.event_id).away_stats] 
+          full_game_stats.each do |box|
+            if full_game_stats.index(box) == 0
+              @opponent = Xmlstats.nba_box_score(game.event_id).away_team.first_name
+            else
+              @opponent = Xmlstats.nba_box_score(game.event_id).home_team.first_name              
+            end 
+            box.each do |line|        
+              @player = Player.where("display_name" => line.display_name).first
+              if @player && @player.display_name == line.display_name               
+                puts "#{@player.display_name} had #{line.points} points - #{@player.first_name}_#{@player.last_name}_#{game.event_id}"
+              else
+                puts "this did not work: #{line.display_name}"
+                @player = Player.new("display_name" => line.display_name, 
+                "first_name" => line.first_name, 
+                "last_name" => line.last_name, 
+                "position" => line.position)
+                @player.save
+                puts "#{@player.display_name} saved!"
+              end
+              @line = Line.new("player_id" => @player.id,
+                                "identifier" => "#{@player.first_name}_#{@player.last_name}_#{game.event_id}",
+                                "points" => line.points,
+                                "field_goals_made" => line.field_goals_made,
+                                "field_goals_attempted" => line.field_goals_attempted,
+                                "three_pointers_made" => line.three_point_field_goals_made,
+                                "free_throws_made" => line.free_throws_made,
+                                "free_throws_attempted" => line.free_throws_attempted,
+                                "rebounds" => line.rebounds,
+                                "assists" => line.assists,
+                                "steals" => line.steals,
+                                "blocks" => line.blocks,
+                                "turnovers" => line.turnovers,
+                                "minutes" => line.minutes,
+                                "event_date" => @start_date,
+                                "opponent" => @opponent
+                                )
+                @line.save
+            end 
+          end
+          @n += 1
           puts "\n"*5
           puts "Sleeping..."
           puts "\n"*5
@@ -23,45 +66,7 @@ task :fetch_stats => :environment do
           puts "AWAKE"
           puts "\n"*5
         end
-        puts game.event_id
-        full_game_stats = [Xmlstats.nba_box_score(game.event_id).home_stats, Xmlstats.nba_box_score(game.event_id).away_stats]
-        full_game_stats.each do |box|
-          box.each do |line|        
-            @player = Player.where("display_name" => line.display_name).first
-            if @player && @player.display_name == line.display_name               
-              puts "#{@player.display_name} had #{line.points} points - #{@player.first_name}_#{@player.last_name}_#{game.event_id}"
-            else
-              puts "this did not work: #{line.display_name}"
-              @player = Player.new("display_name" => line.display_name, 
-              "first_name" => line.first_name, 
-              "last_name" => line.last_name, 
-              "position" => line.position)
-              @player.save
-              puts "#{@player.display_name} saved!"
-            end
-            # @line = Line.new("player_id" => @player.id,
-            #                   "identifier" => "#{@player.first_name}_#{@player.last_name}_#{game.event_id}",
-            #                   "points" => line.points,
-            #                   "field_goals_made" => line.field_goals_made,
-            #                   "field_goals_attempted" => line.field_goals_attempted,
-            #                   "three_pointers_made" => line.three_point_field_goals_made,
-            #                   "free_throws_made" => line.free_throws_made,
-            #                   "free_throws_attempted" => line.free_throws_attempted,
-            #                   "rebounds" => line.rebounds,
-            #                   "assists" => line.assists,
-            #                   "steals" => line.steals,
-            #                   "blocks" => line.blocks,
-            #                   "turnovers" => line.turnovers,
-            #                   "minutes" => line.minutes,
-            #                   "event_date" => @start_date
-            #                   )
-            #   @line.save
-          end 
-        end
-        @n += 1
-      end
-
-     
+      end     
     end
     @start_date = @start_date + 1.day
   end
@@ -100,6 +105,7 @@ task :fetch_stats => :environment do
   #           "position" => player.position)
   #   @player.save
   # end
+  puts "Finished at #{Time.now}"
 
 end
 
