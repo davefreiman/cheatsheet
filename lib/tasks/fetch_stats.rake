@@ -8,7 +8,7 @@ task :fetch_stats => :environment do
   Xmlstats.contact_info = @admin.email
 
   @n = 0
-  @start_date = Date.parse("2013-10-30")
+  @start_date = Date.parse("2013-10-28")
 
   while @start_date < Date.today
     @nightly_games = Xmlstats.events(@start_date, :nba)
