@@ -2,6 +2,6 @@
 
 <h2><%= team %> </h2>
   <% @players.where("nba_team" => team ).each do |player| %>
-  <p><%= "#{player.display_name} - #{player.position}" %></p>
+  <p><%= link_to "#{player.display_name} - #{player.position}", player_path(player) %></p>
   <% end %>
 <% end %>

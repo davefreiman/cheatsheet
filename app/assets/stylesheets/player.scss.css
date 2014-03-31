@@ -1,0 +1,11 @@
+
+.season-stats, .line-row {
+  border: 1px solid #D4933D;
+  width: 100%;
+  text-align: center;
+}
+
+  .stat-holder {
+    width: 6%;
+    display: inline-block;
+  }

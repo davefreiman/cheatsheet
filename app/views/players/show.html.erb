@@ -1,5 +1,24 @@
 <h2><%= @player.display_name %></h2>
 
+<h4>2013-2014 Season</h4>
+<div class="season-stats">
+<% @stat_fields.each do |field, abbr| %>
+  <div class="stat-holder">
+    <div class="stat-header"><p><%= abbr %></p></div>
+    <div class="stat-value"><p><%= @player.send(field.to_sym)%></p></div>
+  </div>
+<%end%>
+</div>
+
+<h4>Game Log</h4>
+
 <% @player.lines.each do |line| %>
-<p><%= line.inspect %></p>
+  <div class="line-row">
+  <% @line_fields.each do |field, abbr| %>
+    <div class="stat-holder">
+      <div class="stat-header"><p><%= abbr %></p></div>
+      <div class="stat-value"><p><%= line.send(field.to_sym)%></p></div>
+    </div>
+  <% end %>
+  </div>
 <% end %>
