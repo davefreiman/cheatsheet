@@ -4,7 +4,8 @@ Cheatsheet::Application.routes.draw do
 
   root 'teams#index'
   resources :teams
-  resources :players 
+  resources :players
+  resources :rosters 
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
