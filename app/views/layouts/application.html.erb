@@ -14,6 +14,19 @@
 
   <body>
     <%= render template: "layouts/_nav" %>
+    <!-- Notices -->
+
+    <% if flash[:notice] %>
+      <div data-alert class="alert-box">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+        <div data-alert class="alert-box">
+            <%= flash[:alert] %>
+        </div>
+    <% end %>
     <div class="main">
       <%= yield %>
     </div>

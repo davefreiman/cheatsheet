@@ -1,0 +1,32 @@
+<%= form_for @user do |f| %>
+
+<div class="text-centered">
+    <div class="row">
+      <div class="large-8 columns">
+        <%= f.label :username %>
+        <%= f.text_field :username %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-8 columns">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-8 columns">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-8 columns">
+        <%= f.submit :class => "button" %>
+      </div>
+    </div>
+</div>
+
+<%end%>

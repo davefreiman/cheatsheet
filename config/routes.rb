@@ -6,6 +6,11 @@ Cheatsheet::Application.routes.draw do
   resources :teams
   resources :players
   resources :rosters 
+  resources :users
+  resources :sessions
+
+  get "login" => "sessions#new", :as => :login
+  delete "logout" => "sessions#destroy", :as => :logout
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
