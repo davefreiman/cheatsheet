@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331042103) do
+ActiveRecord::Schema.define(version: 20140408033844) do
 
   create_table "lines", force: true do |t|
     t.integer  "player_id"
@@ -89,6 +89,22 @@ ActiveRecord::Schema.define(version: 20140331042103) do
     t.string   "owner"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "totallines", force: true do |t|
+    t.string   "season"
+    t.integer  "points"
+    t.integer  "field_goal_percentage"
+    t.integer  "free_throw_percentage"
+    t.integer  "three_pointers_made"
+    t.integer  "rebounds"
+    t.integer  "assists"
+    t.integer  "blocks"
+    t.integer  "steals"
+    t.integer  "turnovers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "type"
   end
 
 end
