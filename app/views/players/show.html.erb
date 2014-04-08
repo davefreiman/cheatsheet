@@ -1,5 +1,15 @@
 <h2><%= @player.display_name %></h2>
 
+<h4>2013-2014 Season Averages</h4>
+  <div class="season-stats">
+<% average_stats(@player).each do |abbr, value|%>
+  <div class="stat-holder">
+    <div class="stat-header"><p><%= abbr %></p></div>
+    <div class="stat-value"><p><%= sprintf('%.2f', value) %></p></div>
+  </div>  
+<% end %>
+</div>
+
 <h4>2013-2014 Season</h4>
 <div class="season-stats">
   <div class="stat-holder">

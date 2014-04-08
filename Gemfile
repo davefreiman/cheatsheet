@@ -46,3 +46,4 @@ end
 
 gem 'xmlstats'
 gem 'whenever'
+gem 'foundation-rails'

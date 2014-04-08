@@ -8,4 +8,8 @@
   .stat-holder {
     width: 6%;
     display: inline-block;
+    
   }
+  .stat-holder.player-name {
+      width: 10%;
+    }
