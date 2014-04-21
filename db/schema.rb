@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408040303) do
+ActiveRecord::Schema.define(version: 20140418170007) do
 
   create_table "lines", force: true do |t|
     t.integer  "player_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140408040303) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "user_id"
   end
 
   create_table "superusers", force: true do |t|

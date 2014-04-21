@@ -1,0 +1,4 @@
+<% @rosters.each do |roster| %>
+
+<h2><%= link_to roster.name, roster_path(roster)%> </h2>
+<% end %>

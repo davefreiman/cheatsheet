@@ -1,0 +1,10 @@
+<div class="stat-holder player-name">
+    <%= form_tag "/rosters/#{@roster.id}", :method => "get" do %>  
+    <div class="stat-header">
+      <%= text_field_tag :search, params[:search], :placeholder => "Add a player", :id =>"nav_item" %>
+    </div>
+    <div class="stat-value">
+      <%= submit_tag 'Add', :name => nil, :class=>"button", :id=>"nav_search_btn" %>  
+    </div> 
+    <% end %>
+</div>

@@ -1,17 +1,29 @@
 <h2><%= @roster.name %></h2>
 
 <h3>Roster</h3>
-<div class="season-stats">
 <% @roster.players.each do |player| %>
+<div class="season-stats">
+
   <div class="stat-holder player-name">
-    <div class="stat-header"><p><%= "Player" %></p></div>
+    <% if @roster.players.index(player) == 0 %>
+      <div class="stat-header"><p><%= "Player" %></p></div>
+    <% end %>   
     <div class="stat-value"><p><%= player.display_name %></p></div>
   </div>
   <% @stat_fields.each do |field, abbr| %>
   <div class="stat-holder">
-    <div class="stat-header"><p><%= abbr %></p></div>
+    <% if @roster.players.index(player) == 0 %>
+      <div class="stat-header"><p><%= abbr %></p></div>
+    <% end %>      
     <div class="stat-value"><p><%= player.send(field.to_sym)%></p></div>
   </div>
   <%end%>
+  </div>  
 <% end %>
-</div>
+
+<% if @players %>
+  <% @players.each do |player| %>
+  <p><%= player.display_name %></p>
+  <%end%>
+  <%end%>
+<p><%= render "form" %></p>
