@@ -8,7 +8,7 @@
     <% if @roster.players.index(player) == 0 %>
       <div class="stat-header"><p><%= "Player" %></p></div>
     <% end %>   
-    <div class="stat-value"><p><%= player.display_name %></p></div>
+    <div class="stat-value"><p><%= link_to player.display_name, player_path(player) %></p></div>
   </div>
   <% @stat_fields.each do |field, abbr| %>
   <div class="stat-holder">
