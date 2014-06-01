@@ -49,6 +49,19 @@ gem 'whenever'
 gem 'foundation-rails'
 gem 'sorcery'
 
-group :development, :test do
+group :tools do
+  gem 'guard-rspec'
+end
+
+group :development do
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'better_errors' 
+  gem "binding_of_caller"
+  gem 'pry-rails'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem "factory_girl_rails"
+  gem "capybara"
 end
