@@ -1,6 +1,10 @@
-<h2><%= @roster.name %></h2>
+ <h2><%= @roster.name %></h2>
 
 <h3>Roster</h3>
+    <%= render "add_player" %>
+
+
+<p><%= render "form" %></p>
 <% @roster.players.each do |player| %>
 <div class="season-stats">
 
@@ -18,12 +22,16 @@
     <div class="stat-value"><p><%= player.send(field.to_sym)%></p></div>
   </div>
   <%end%>
+    <div class="stat-holder">
+      <div class="stat-value">
+        <%= form_tag ["remove_player", @roster] do %>
+          <%= hidden_field_tag(:player_id, player.id) %>
+          <%= hidden_field_tag(:roster_id, @roster.id) %>
+
+          <%= submit_tag 'Remove', :name => nil, :class=>"button", :id=>"roster_button" %>  
+        <% end %>
+      </div>
+    </div>
   </div>  
 <% end %>
 
-<% if @players %>
-  <% @players.each do |player| %>
-  <p><%= player.display_name %></p>
-  <%end%>
-  <%end%>
-<p><%= render "form" %></p>

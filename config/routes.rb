@@ -2,7 +2,7 @@ Cheatsheet::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'teams#index'
+  root 'welcome#index'
   resources :teams
   resources :players
   resources :rosters 
@@ -11,6 +11,8 @@ Cheatsheet::Application.routes.draw do
 
   get "login" => "sessions#new", :as => :login
   delete "logout" => "sessions#destroy", :as => :logout
+  post "add_player_roster" => "rosters#add_player", :as => :add_player_roster
+  post "remove_player_roster" => "rosters#remove_player", :as => :remove_player_roster
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

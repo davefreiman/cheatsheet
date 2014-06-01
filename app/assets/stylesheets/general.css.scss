@@ -1,0 +1,15 @@
+.logo-wrapper {
+  float:none;
+  margin: 0 auto;
+  .logo {
+    display: block;
+    margin: 0 auto;
+  }
+  h3, p {
+    text-align: center;
+  }
+}
+
+button.button, input.button {
+  padding: 10px;
+}

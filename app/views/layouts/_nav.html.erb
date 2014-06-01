@@ -1,6 +1,7 @@
 <div class="nav-wrapper"> 
   <ul id="nav">
-    <li><%= link_to "CheatSheet", players_path %></li>
+    <li><%= link_to "CheatSheet", root_path %></li>
+    <li><%= link_to "Players", players_path %></li>
     <div class="users">
       <li><%= user_check %></li>
       <% if !logged_in? %>

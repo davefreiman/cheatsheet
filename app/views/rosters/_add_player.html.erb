@@ -1,0 +1,14 @@
+<% if @players %>
+  <% @players.each do |player| %>
+    <div class="player-add-form-container">
+      <div>
+        <p><%= player.display_name %></p>  
+        <%= form_tag ["add_player", @roster] do %>
+          <%= hidden_field_tag(:player_id, player.id) %>
+          <%= hidden_field_tag(:roster_id, @roster.id) %>
+          <%= submit_tag 'Add', :name => nil, :class=>"button", :id=>"roster_button" %>  
+        <% end %>
+      </div>
+    </div>  
+  <%end%>
+<%end%>
