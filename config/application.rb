@@ -23,5 +23,6 @@ module Cheatsheet
     config.generators do |g|
       g.test_framework :rspec, :fixture => false
     end
+    
   end
 end

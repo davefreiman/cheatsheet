@@ -5,7 +5,7 @@ Cheatsheet::Application.routes.draw do
   root 'welcome#index'
   resources :teams
   resources :players
-  resources :rosters 
+  resources :rosters
   resources :users
   resources :sessions
 

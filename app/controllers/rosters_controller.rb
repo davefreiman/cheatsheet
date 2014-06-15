@@ -1,10 +1,17 @@
 class RostersController < ApplicationController
   def show
     @roster = Roster.find(params[:id])
-    #TODO: ROSTER BUILDER TOOL
+    @players = @roster.players.all
     if params[:search]
-      @players = Player.search(params[:search])
-    end    
+      @search_players = Player.search(params[:search])
+    end
+
+    respond_to do |format|
+      format.js {
+       @mode = params[:mode] if params[:mode]     
+      }
+      format.html 
+    end   
   end
 
   def index
@@ -27,9 +34,6 @@ class RostersController < ApplicationController
   def remove_player
     @player = Player.find(params[:player_id])
     @roster = Roster.find(params[:roster_id])
-    puts "\n"*5
-    p params
-    puts "\n"*5
     @player.update_attributes(roster_id: nil)
     redirect_to roster_path(@roster)
   end

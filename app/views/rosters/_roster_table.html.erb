@@ -1,21 +1,6 @@
- <h2><%= @roster.name %></h2>
 
-<h3>Roster</h3>
-    <%= render "add_player" %>
-
-
-<p><%= render "form" %></p>
-
-<ul>
-  <li><%= link_to "Average Stats", roster_path(@roster, {mode: 'average'}), :remote => true %></li>
-  <li><%= link_to "Season Stats", roster_path(@roster, {mode: 'season'}), :remote => true %></li>
-</ul>
-
-
-<div class='roster-table'>
 <% @players.each do |player| %>
   <div class="season-stats">
-
     <div class="stat-holder player-name">
       <% if @players.index(player) == 0 %>
         <div class="stat-header"><p><%= "Player" %></p></div>
@@ -27,7 +12,7 @@
       <% if @players.index(player) == 0 %>
         <div class="stat-header"><p><%= abbr %></p></div>
       <% end %>      
-      <div class="stat-value"><p><%= player.send(field.to_sym)%></p></div>
+      <div class="stat-value"><p><%= get_stat(player, field, @mode) %></p></div>
     </div>
     <%end%>
     <div class="stat-holder">
@@ -42,5 +27,3 @@
     </div>
   </div>
 <% end %>
-</div>  
-

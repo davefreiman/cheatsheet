@@ -14,3 +14,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.rspec
+/log
+/tmp
+/public/system
+/coverage/
+/spec/tmp
