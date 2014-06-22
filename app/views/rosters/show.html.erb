@@ -1,46 +1,15 @@
+<%= javascript_include_tag "draggabilly.pkgd.js" %>
  <h2><%= @roster.name %></h2>
 
 <h3>Roster</h3>
-    <%= render "add_player" %>
+<%= render "add_player" %>
 
 
 <p><%= render "form" %></p>
 
-<ul>
-  <li><%= link_to "Average Stats", roster_path(@roster, {mode: 'average'}), :remote => true %></li>
-  <li><%= link_to "Season Stats", roster_path(@roster, {mode: 'season'}), :remote => true %></li>
-</ul>
 
 
 <div class='roster-table'>
-<% @players.each do |player| %>
-  <div class="season-stats">
-
-    <div class="stat-holder player-name">
-      <% if @players.index(player) == 0 %>
-        <div class="stat-header"><p><%= "Player" %></p></div>
-      <% end %>   
-      <div class="stat-value"><p><%= link_to player.display_name, player_path(player) %></p></div>
-    </div>
-    <% @stat_fields.each do |field, abbr| %>
-    <div class="stat-holder">
-      <% if @players.index(player) == 0 %>
-        <div class="stat-header"><p><%= abbr %></p></div>
-      <% end %>      
-      <div class="stat-value"><p><%= player.send(field.to_sym)%></p></div>
-    </div>
-    <%end%>
-    <div class="stat-holder">
-      <div class="stat-value">
-        <%= form_tag ["remove_player", @roster] do %>
-          <%= hidden_field_tag(:player_id, player.id) %>
-          <%= hidden_field_tag(:roster_id, @roster.id) %>
-
-          <%= submit_tag 'Remove', :name => nil, :class=>"button", :id=>"roster_button" %>  
-        <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
+  <%= render partial: "roster_table" %>
 </div>  
 

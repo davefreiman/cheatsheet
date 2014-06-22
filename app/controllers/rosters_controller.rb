@@ -2,6 +2,7 @@ class RostersController < ApplicationController
   def show
     @roster = Roster.find(params[:id])
     @players = @roster.players.all
+    @mode = 'season'
     if params[:search]
       @search_players = Player.search(params[:search])
     end

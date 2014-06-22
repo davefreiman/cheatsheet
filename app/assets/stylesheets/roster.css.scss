@@ -4,3 +4,18 @@
     width: 40%;
   }
 }
+
+.switches ul {
+  li {
+    list-style: none;
+    display: inline-block;
+    border: 2px solid;
+    background: #98A2b5;
+    a {
+      color: black;
+      padding: 5px;
+      font-weight: normal;
+    }
+    a.active { font-weight: bold; }
+  }
+}

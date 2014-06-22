@@ -1,4 +1,11 @@
 
+<div class="switches">
+  <ul>
+    <li><%= link_to "Average Stats", roster_path(@roster, {mode: 'average'}), :remote => true, :class => 'average' %></li>
+    <li><%= link_to "Season Stats", roster_path(@roster, {mode: 'season'}), :remote => true, :class => 'season' %></li>
+  </ul>
+</div>
+
 <% @players.each do |player| %>
   <div class="season-stats">
     <div class="stat-holder player-name">
@@ -17,7 +24,7 @@
     <%end%>
     <div class="stat-holder">
       <div class="stat-value">
-        <%= form_tag ["remove_player", @roster] do %>
+        <%= form_tag ["remove_player", @roster], :remote => true do %>
           <%= hidden_field_tag(:player_id, player.id) %>
           <%= hidden_field_tag(:roster_id, @roster.id) %>
 
@@ -27,3 +34,17 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(function(){
+  var mode = '<%= escape_javascript(@mode) %>';
+  if (mode == 'average'){
+      $('.season').removeClass('active');
+      $('.average').addClass('active');
+  }
+  else if (mode == 'season'){
+      $('.average').removeClass('active');      
+      $('.season').addClass('active');
+  }
+})
+</script>
